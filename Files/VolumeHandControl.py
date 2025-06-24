@@ -4,7 +4,7 @@ import numpy as np
 import HandTrackingModule as htm
 
 
-########## Camera setting
+########## Camera Setting
 weightCam, heightCam = 900, 600
 ##########
 
