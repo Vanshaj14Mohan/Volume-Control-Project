@@ -19,6 +19,7 @@ while True:
     success, img = cap.read()
     img = detector.findHands(img)
 
+
     cTime = time.time()
     fps = 1 / (cTime - pTime)
     pTime = cTime
