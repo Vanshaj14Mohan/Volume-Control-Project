@@ -20,7 +20,14 @@ while True:
     img = detector.findHands(img)
     lmList = detector.findPosition(img, draw=False)
     if len(lmList) != 0:
-        print(lmList[2])
+        print(lmList[4], lmList[8]) #For thumb and index finger
+
+        x1, y1 = lmList[4][1], lmList[4][2] #First element as x and secodn element as y
+        x2, y2 = lmList[8][1], lmList[8][2]
+
+        #Draw circle on thumb and index point
+        cv2.circle(img, (x1,y1), 8, (255,0,255), cv2.FILLED)
+        cv2.circle(img, (x2,y2), 8, (255,0,255), cv2.FILLED)
 
 
     cTime = time.time()
