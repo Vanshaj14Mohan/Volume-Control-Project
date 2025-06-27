@@ -28,7 +28,6 @@ volume = cast(interface, POINTER(IAudioEndpointVolume))
 # volume.GetMasterVolumeLevel()
 volRange = volume.GetVolumeRange()
 # print(volume.GetVolumeRange())
-volume.SetMasterVolumeLevel(0, None)
 minVol = volRange[0]
 maxVol = volRange[1]
 
@@ -56,7 +55,8 @@ while True:
 
         #Hand range lies between 8 - 200, And our volume range is -65 - 0.
         vol = np.interp(length,[8, 200], [minVol, maxVol]) #Interpolate between minVol and maxVol based
-        print(vol)
+        print(int(length), vol)
+        volume.SetMasterVolumeLevel(vol, None)
 
         if length <30:
             cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED) 
