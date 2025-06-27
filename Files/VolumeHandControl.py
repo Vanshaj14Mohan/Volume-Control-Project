@@ -56,6 +56,7 @@ while True:
 
         #Hand range lies between 8 - 200, And our volume range is -65 - 0.
         vol = np.interp(length,[8, 200], [minVol, maxVol]) #Interpolate between minVol and maxVol based
+        volBar = np.interp(length,[8, 200], [400, 150])
         print(int(length), vol)
         volume.SetMasterVolumeLevel(vol, None)
 
