@@ -54,6 +54,10 @@ while True:
         length = math.hypot(x2-x1, y2-y1)
         #print(length)
 
+        #Hand range lies between 8 - 200, And our volume range is -65 - 0.
+        vol = np.interp(length,[8, 200], [minVol, maxVol]) #Interpolate between minVol and maxVol based
+        print(vol)
+
         if length <30:
             cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED) 
 
