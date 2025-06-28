@@ -108,6 +108,7 @@ Make sure your webcam is connected and accessible.
 * Adjust the range mapping in `VolumeHandControl.py` as needed.
 * This project is tested on Windows due to pycaw compatibility.
 * Frame rate (FPS) helps evaluate real-time performance.
+* Note: pycaw works on Windows only.
 
 ---
 
