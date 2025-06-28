@@ -38,7 +38,6 @@ while True:
     img = detector.findHands(img)
     lmList = detector.findPosition(img, draw=False)
     if len(lmList) != 0:
-
         #print(lmList[4], lmList[8]) #For thumb and index finger
         x1, y1 = lmList[4][1], lmList[4][2] #First element as x and second element as y
         x2, y2 = lmList[8][1], lmList[8][2]
