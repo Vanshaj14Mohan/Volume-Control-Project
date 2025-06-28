@@ -40,7 +40,6 @@ while True:
     if len(lmList) != 0:
 
         #print(lmList[4], lmList[8]) #For thumb and index finger
-
         x1, y1 = lmList[4][1], lmList[4][2] #First element as x and second element as y
         x2, y2 = lmList[8][1], lmList[8][2]
         cx, cy = (x1+x2) // 2, (y1+y2) // 2
