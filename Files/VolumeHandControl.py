@@ -7,7 +7,7 @@ from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 
-########## Camera Setting
+########## Basic Camera Setting
 weightCam, heightCam = 900, 600
 ##########
 
