@@ -31,7 +31,7 @@ minVol = volRange[0]
 maxVol = volRange[1]
 vol = 0
 volBar = 400
-
+volPer = 0
 
 while True:
     success, img = cap.read()
@@ -57,14 +57,16 @@ while True:
         #Hand range lies between 8 - 200, And our volume range is -65 - 0.
         vol = np.interp(length,[8, 200], [minVol, maxVol]) #Interpolate between minVol and maxVol based
         volBar = np.interp(length,[8, 200], [400, 150])
+        volPer = np.interp(length,[8, 200], [0, 100])
         print(int(length), vol)
         volume.SetMasterVolumeLevel(vol, None)
 
         if length <30:
             cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED) 
 
-    cv2.rectangle(img,(50, 150), (85,400), (0,255,0), 3)
-    cv2.rectangle(img,(50, int(volBar)), (85,400), (0,255,0), cv2.FILLED)
+    cv2.rectangle(img,(50, 150), (85,400), (255, 0, 0), 3)
+    cv2.rectangle(img,(50, int(volBar)), (85,400), (255, 0, 0), cv2.FILLED)
+    cv2.putText(img, f":{int(volPer)} %", (40, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
 
     cTime = time.time()
     fps = 1 / (cTime - pTime)
