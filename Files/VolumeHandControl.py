@@ -20,6 +20,7 @@ pTime = 0 # Previous time (for FPS calculation)
 # Initialize hand detector with 0.7 detection confidence
 detector = htm.HandDetector(detectionCon=0.7)
 
+# Initialize audio interface using pycaw
 devices = AudioUtilities.GetSpeakers()
 interface = devices.Activate(
     IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
@@ -27,17 +28,19 @@ interface = devices.Activate(
 volume = cast(interface, POINTER(IAudioEndpointVolume))
 # volume.GetMute()
 # volume.GetMasterVolumeLevel()
+
+# Get the volume range of the system
 volRange = volume.GetVolumeRange()
 # print(volume.GetVolumeRange())
-minVol = volRange[0]
-maxVol = volRange[1]
-vol = 0
-volBar = 400
-volPer = 0
+minVol = volRange[0] # Minimum volume (usually around -65 dB)
+maxVol = volRange[1] # Maximum volume (usually 0 dB)
+vol = 0 # Current volume level
+volBar = 400 # Y-coordinate for volume bar display
+volPer = 0  # Current volume percentage
 
-while True:
+while True:  # Read frame from webcam
     success, img = cap.read()
-    img = detector.findHands(img)
+    img = detector.findHands(img)  # Detect hands and landmarks in the frame
     lmList = detector.findPosition(img, draw=False)
     if len(lmList) != 0:
         #print(lmList[4], lmList[8]) #For thumb and index finger
@@ -64,16 +67,18 @@ while True:
         if length <30:
             cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED) 
 
+    # Draw volume bar background and fill
     cv2.rectangle(img,(50, 150), (85,400), (255, 0, 0), 3)
     cv2.rectangle(img,(50, int(volBar)), (85,400), (255, 0, 0), cv2.FILLED)
     cv2.putText(img, f"Volume:{int(volPer)} %", (40, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 3) #For volume percentage
 
+    # Calculate and display FPS
     cTime = time.time()
     fps = 1 / (cTime - pTime)
     pTime = cTime
     cv2.putText(img, f"FPS:{int(fps)}", (40, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3) #FPS Count 
 
-    cv2.imshow("Img", img)
+    cv2.imshow("Img", img) # Show the processed frame
     cv2.waitKey(1)
 
     
