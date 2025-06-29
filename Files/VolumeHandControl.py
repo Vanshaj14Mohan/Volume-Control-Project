@@ -64,12 +64,12 @@ while True:
 
     cv2.rectangle(img,(50, 150), (85,400), (255, 0, 0), 3)
     cv2.rectangle(img,(50, int(volBar)), (85,400), (255, 0, 0), cv2.FILLED)
-    cv2.putText(img, f"Volume:{int(volPer)} %", (40, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 3)
+    cv2.putText(img, f"Volume:{int(volPer)} %", (40, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 3) #For volume percentage
 
     cTime = time.time()
     fps = 1 / (cTime - pTime)
     pTime = cTime
-    cv2.putText(img, f"FPS:{int(fps)}", (40, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3)
+    cv2.putText(img, f"FPS:{int(fps)}", (40, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3) #FPS Count 
 
     cv2.imshow("Img", img)
     cv2.waitKey(1)
