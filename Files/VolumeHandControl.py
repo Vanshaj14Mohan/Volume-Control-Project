@@ -11,11 +11,13 @@ from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 weightCam, heightCam = 900, 600
 ##########
 
+# Initialize webcam capture
 cap = cv2.VideoCapture(0)
-cap.set(3, weightCam)
-cap.set(4, heightCam)
-pTime = 0
+cap.set(3, weightCam)  # Set camera width
+cap.set(4, heightCam)  # Set camera height
+pTime = 0 # Previous time (for FPS calculation)
 
+# Initialize hand detector with 0.7 detection confidence
 detector = htm.HandDetector(detectionCon=0.7)
 
 devices = AudioUtilities.GetSpeakers()
