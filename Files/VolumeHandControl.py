@@ -43,7 +43,7 @@ while True:  # Read frame from webcam
     img = detector.findHands(img)  # Detect hands and landmarks in the frame
     lmList = detector.findPosition(img, draw=False)
     if len(lmList) != 0:
-        #print(lmList[4], lmList[8]) #For thumb and index finger
+        #print(lmList[4], lmList[8]) #For thumb and index finger, getting coordinatesF
         x1, y1 = lmList[4][1], lmList[4][2] #First element as x and second element as y
         x2, y2 = lmList[8][1], lmList[8][2]
         cx, cy = (x1+x2) // 2, (y1+y2) // 2
@@ -54,17 +54,17 @@ while True:  # Read frame from webcam
         cv2.line(img, (x1,y1), (x2,y2), (255,0,255),3)
         cv2.circle(img, (cx,cy), 10, (255,0,255), cv2.FILLED) #Center circle
 
-        length = math.hypot(x2-x1, y2-y1)
+        length = math.hypot(x2-x1, y2-y1) # Calculate distance between thumb and index finger
         #print(length)
 
         #Hand range lies between 8 - 200, And our volume range is -65 - 0.
         vol = np.interp(length,[8, 200], [minVol, maxVol]) #Interpolate between minVol and maxVol based
         volBar = np.interp(length,[8, 200], [400, 150])
         volPer = np.interp(length,[8, 200], [0, 100])
-        print(int(length), vol)
-        volume.SetMasterVolumeLevel(vol, None)
+        print(int(length), vol) # Print length and volume (for debugging/logging)
+        volume.SetMasterVolumeLevel(vol, None)# Set the system master volume level
 
-        if length <30:
+        if length <30: # If fingers are very close, change center circle color to green
             cv2.circle(img, (cx,cy), 10, (0,255,0), cv2.FILLED) 
 
     # Draw volume bar background and fill
