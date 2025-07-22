@@ -25,7 +25,7 @@ devices = AudioUtilities.GetSpeakers()
 interface = devices.Activate(
     IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
 # volume = interface.QueryInterface(IAudioEndpointVolume)
-volume = cast(interface, POINTER(IAudioEndpointVolume))
+volume = cast(interface, POINTER(IAudioEndpointVolume)) 
 # volume.GetMute()
 # volume.GetMasterVolumeLevel()
 
@@ -79,6 +79,9 @@ while True:  # Read frame from webcam
     cv2.putText(img, f"FPS:{int(fps)}", (40, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3) #FPS Count 
 
     cv2.imshow("Img", img) # Show the processed frame
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+    
     cv2.waitKey(1)
 
     
